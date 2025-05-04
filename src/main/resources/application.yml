@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: Alice AI
+  data:
+    mongodb:
+      uri: mongodb://root:example@localhost:27017/alice
+      database: alice
