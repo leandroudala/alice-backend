@@ -5,3 +5,7 @@ spring:
     mongodb:
       uri: mongodb://root:example@localhost:27017/alice
       database: alice
+
+springdoc:
+  swagger-ui:
+    path: /docs
