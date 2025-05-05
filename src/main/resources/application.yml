@@ -3,7 +3,7 @@ spring:
     name: Alice AI
   data:
     mongodb:
-      uri: mongodb://root:example@localhost:27017/alice
+      uri: mongodb://root:example@localhost:27017/admin
       database: alice
 
 springdoc:
