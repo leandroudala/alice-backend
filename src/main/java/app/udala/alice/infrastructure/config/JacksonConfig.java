@@ -11,6 +11,7 @@ public class JacksonConfig {
     @Bean
     ObjectMapper objectMapper() {
         ObjectMapper mapper = new ObjectMapper();
+        // remove null values from JSON Response
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         return mapper;
     }
