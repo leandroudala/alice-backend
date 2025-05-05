@@ -7,8 +7,10 @@ import org.springframework.context.annotation.Configuration;
 import app.udala.alice.application.port.CreateDataBaseUseCase;
 import app.udala.alice.application.port.DataBaseRepository;
 import app.udala.alice.application.port.GetDataBaseUseCase;
-import app.udala.alice.application.usecase.CreateDataBaseMongo;
-import app.udala.alice.application.usecase.GetDataBaseMongo;
+import app.udala.alice.application.port.ManageDataBaseUseCase;
+import app.udala.alice.application.usecase.CreateDataBaseMongoUseCase;
+import app.udala.alice.application.usecase.GetDataBaseMongoUseCase;
+import app.udala.alice.application.usecase.ManageDataBaseMongoUseCase;
 
 @Configuration
 public class DataBaseConfig {
@@ -18,11 +20,16 @@ public class DataBaseConfig {
 
     @Bean
     public CreateDataBaseUseCase createDataBaseUseCase() {
-        return new CreateDataBaseMongo(this.dataBaseRepository);
+        return new CreateDataBaseMongoUseCase(this.dataBaseRepository);
     }
 
     @Bean
     public GetDataBaseUseCase getDataBaseUseCase() {
-        return new GetDataBaseMongo(this.dataBaseRepository);
+        return new GetDataBaseMongoUseCase(this.dataBaseRepository);
+    }
+
+    @Bean
+    public ManageDataBaseUseCase getManageDataBaseUseCase() {
+        return new ManageDataBaseMongoUseCase(this.dataBaseRepository);
     }
 }

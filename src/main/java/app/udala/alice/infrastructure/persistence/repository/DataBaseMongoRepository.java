@@ -10,7 +10,7 @@ import app.udala.alice.application.port.DataBaseRepository;
 import app.udala.alice.infrastructure.persistence.entity.DataBaseDocument;
 
 public interface DataBaseMongoRepository extends DataBaseRepository, MongoRepository<DataBaseDocument, String> {
-    @Query("{ 'name' : ?0 }")
+    @Query("{ 'name' : ?0, 'deletedAt' : null }")
     Optional<DataBaseDocument> findByName(String name);
 
     List<DataBaseDocument> findAll();
