@@ -12,6 +12,7 @@ public class Field {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
+    private String databaseId;
 
     public String getId() {
         return this.id;
@@ -87,6 +88,14 @@ public class Field {
 
     public void setDataType(String dataType) {
         this.dataType = dataType;
+    }
+
+    public String getDatabaseId() {
+        return this.databaseId;
+    }
+
+    public void setDatabaseId(String databaseId) {
+        this.databaseId = databaseId;
     }
 
 }

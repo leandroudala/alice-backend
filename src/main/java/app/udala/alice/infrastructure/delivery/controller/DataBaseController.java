@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import app.udala.alice.application.port.CreateDataBaseUseCase;
 import app.udala.alice.application.port.GetDataBaseUseCase;
@@ -43,9 +44,11 @@ public class DataBaseController {
     }
 
     @PostMapping()
-    public ResponseEntity<DataBaseResponse> create(@RequestBody DataBaseCreateRequest request) {
+    public ResponseEntity<DataBaseResponse> create(@RequestBody DataBaseCreateRequest request,
+            UriComponentsBuilder uriBuilder) {
         DataBaseResponse response = this.createDatabase.create(request);
-        URI uri = URI.create(String.format("/api/v1/databases/%s", response.getId()));
+
+        URI uri = uriBuilder.path("/api/v1/databases/{id}").buildAndExpand(response.getId()).toUri();
         return ResponseEntity.created(uri).body(response);
     }
 

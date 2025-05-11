@@ -6,22 +6,22 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import app.udala.alice.infrastructure.delivery.dto.ErrorResponseDto;
-import app.udala.alice.shared.exception.DataBaseDuplicatedNameException;
-import app.udala.alice.shared.exception.DataBaseNotFoundException;
+import app.udala.alice.shared.exception.EntityDuplicatedException;
+import app.udala.alice.shared.exception.EntityNotFoundException;
 
 @RestControllerAdvice
 public class ExceptionHandlerController {
 
-    @ExceptionHandler(DataBaseNotFoundException.class)
+    @ExceptionHandler(EntityNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponseDto handleDataBaseNotFoundException(DataBaseNotFoundException ex) {
-        return new ErrorResponseDto("DATABASE_NOT_FOUND", "DataBase Not Found", ex.getMessage());
+    public ErrorResponseDto handleEntityNotFoundException(EntityNotFoundException ex) {
+        return new ErrorResponseDto(ex.getCategory(), ex.getTitle(), ex.getMessage());
     }
 
-    @ExceptionHandler(DataBaseDuplicatedNameException.class)
+    @ExceptionHandler(EntityDuplicatedException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponseDto handleDataBaseNotFoundException(DataBaseDuplicatedNameException ex) {
-        return new ErrorResponseDto("DUPLICATED_DATABASE", "Duplicated Data Base", ex.getMessage());
+    public ErrorResponseDto handleDataBaseNotFoundException(EntityDuplicatedException ex) {
+        return new ErrorResponseDto(ex.getCategory(), ex.getTitle(), ex.getMessage());
     }
 
     @ExceptionHandler(RuntimeException.class)

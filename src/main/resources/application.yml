@@ -5,6 +5,9 @@ spring:
     mongodb:
       uri: mongodb://root:example@localhost:27017/admin
       database: alice
+  jackson:
+    date-format: yyyy-MM-dd'T'HH:mm:ss.SSSSSS
+    time-zone: UTC
 
 springdoc:
   swagger-ui:

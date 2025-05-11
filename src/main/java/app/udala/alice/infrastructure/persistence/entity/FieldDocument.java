@@ -1,7 +1,12 @@
 package app.udala.alice.infrastructure.persistence.entity;
 
+import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Document("Field")
 public class FieldDocument {
@@ -11,14 +16,26 @@ public class FieldDocument {
     private String tag;
     private String description;
     private boolean required;
-    private String createdAt;
-    private String updatedAt;
-    private String deletedAt;
+
+    @CreatedDate
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime updatedAt;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime deletedAt;
     private String databaseId;
     private String dataType;
 
     public FieldDocument() {
         // empty constructor for ORM
+    }
+
+    public void preRemove() {
+        this.deletedAt = LocalDateTime.now();
     }
 
     public FieldDocument(String tag, String name, String description, boolean required) {
@@ -72,27 +89,27 @@ public class FieldDocument {
         this.required = required;
     }
 
-    public String getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return this.createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return this.updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 
-    public String getDeletedAt() {
+    public LocalDateTime getDeletedAt() {
         return this.deletedAt;
     }
 
-    public void setDeletedAt(String deletedAt) {
+    public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
     }
 
