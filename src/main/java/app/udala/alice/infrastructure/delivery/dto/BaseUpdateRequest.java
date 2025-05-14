@@ -1,16 +1,16 @@
 package app.udala.alice.infrastructure.delivery.dto;
 
-public class DataBaseCreateRequest {
+public class BaseUpdateRequest {
+    private String id;
     private String name;
     private String description;
 
-    public DataBaseCreateRequest() {
-        // Default constructor
+    public String getId() {
+        return this.id;
     }
 
-    public DataBaseCreateRequest(String name, String description) {
-        this.name = name;
-        this.description = description;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

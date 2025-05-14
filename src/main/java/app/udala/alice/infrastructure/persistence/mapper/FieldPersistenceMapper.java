@@ -10,7 +10,7 @@ public class FieldPersistenceMapper {
         model.setName(entity.getName());
         model.setTag(entity.getTag());
         model.setDescription(entity.getDescription());
-        model.setDatabaseId(entity.getDatabaseId());
+        model.setBaseId(entity.getBaseId());
         model.setDataType(entity.getDataType());
         model.setRequired(entity.getRequired());
         model.setCreatedAt(entity.getCreatedAt());
@@ -27,7 +27,7 @@ public class FieldPersistenceMapper {
         document.setDescription(model.getDescription());
         document.setDataType(model.getDataType());
         document.setRequired(model.getRequired());
-        document.setDatabaseId(model.getDatabaseId());
+        document.setBaseId(model.getBaseId());
         document.setCreatedAt(model.getCreatedAt());
         document.setUpdatedAt(model.getUpdatedAt());
         document.setDeletedAt(model.getDeletedAt());

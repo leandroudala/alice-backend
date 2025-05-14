@@ -2,7 +2,7 @@ package app.udala.alice.domain.entity;
 
 import java.time.LocalDateTime;
 
-public class DataBase {
+public class Base {
     private String id;
     private String name;
     private LocalDateTime createdAt;
@@ -10,11 +10,11 @@ public class DataBase {
     private LocalDateTime deletedAt;
     private String description;
 
-    public DataBase() {
+    public Base() {
         // empty constructor
     }
 
-    public DataBase(String id, String name, String description, LocalDateTime createdAt, LocalDateTime updatedAt,
+    public Base(String id, String name, String description, LocalDateTime createdAt, LocalDateTime updatedAt,
             LocalDateTime deletedAt) {
         this.id = id;
         this.name = name;

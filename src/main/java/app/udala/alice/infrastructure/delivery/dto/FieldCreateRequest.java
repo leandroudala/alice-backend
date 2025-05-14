@@ -6,7 +6,7 @@ public class FieldCreateRequest {
     private String dataType;
     private String description;
     private boolean required;
-    private String databaseId;
+    private String baseId;
 
     public FieldCreateRequest() {
         // empty constructor
@@ -56,12 +56,12 @@ public class FieldCreateRequest {
         this.required = required;
     }
 
-    public String getDatabaseId() {
-        return this.databaseId;
+    public String getBaseId() {
+        return this.baseId;
     }
 
-    public void setDatabaseId(String databaseId) {
-        this.databaseId = databaseId;
+    public void setBaseId(String baseId) {
+        this.baseId = baseId;
     }
 
 }

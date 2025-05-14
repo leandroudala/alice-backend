@@ -27,7 +27,7 @@ public class FieldDocument {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime deletedAt;
-    private String databaseId;
+    private String baseId;
     private String dataType;
 
     public FieldDocument() {
@@ -113,12 +113,12 @@ public class FieldDocument {
         this.deletedAt = deletedAt;
     }
 
-    public String getDatabaseId() {
-        return this.databaseId;
+    public String getBaseId() {
+        return this.baseId;
     }
 
-    public void setDatabaseId(String databaseId) {
-        this.databaseId = databaseId;
+    public void setBaseId(String baseId) {
+        this.baseId = baseId;
     }
 
     public String getDataType() {

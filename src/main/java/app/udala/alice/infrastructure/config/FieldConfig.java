@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import app.udala.alice.application.port.DataBaseRepository;
+import app.udala.alice.application.port.BaseRepository;
 import app.udala.alice.application.port.FieldRepository;
 import app.udala.alice.application.port.GetFieldsUseCase;
-import app.udala.alice.application.port.ManageFieldsUseCase;
+import app.udala.alice.application.port.ManageFieldUseCase;
 import app.udala.alice.application.usecase.GetFieldsMongoUseCase;
 import app.udala.alice.application.usecase.ManageFieldMongoUseCase;
 import app.udala.alice.infrastructure.persistence.repository.FieldMongoRepository;
@@ -29,7 +29,7 @@ public class FieldConfig {
     }
 
     @Bean
-    ManageFieldsUseCase createManageFieldsUseCase(@Autowired FieldRepository repository, @Autowired DataBaseRepository databaseRepository) {
-        return new ManageFieldMongoUseCase(repository, databaseRepository);
+    ManageFieldUseCase createManageFieldsUseCase(@Autowired FieldRepository repository, @Autowired BaseRepository baseRepository) {
+        return new ManageFieldMongoUseCase(repository, baseRepository);
     }
 }

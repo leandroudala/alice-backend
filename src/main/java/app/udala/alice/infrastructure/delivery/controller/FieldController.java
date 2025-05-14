@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import app.udala.alice.application.port.GetFieldsUseCase;
-import app.udala.alice.application.port.ManageFieldsUseCase;
+import app.udala.alice.application.port.ManageFieldUseCase;
 import app.udala.alice.domain.entity.Field;
 import app.udala.alice.infrastructure.delivery.dto.FieldCreateRequest;
 import app.udala.alice.infrastructure.delivery.dto.FieldDetailsResponse;
@@ -28,16 +28,16 @@ import app.udala.alice.infrastructure.delivery.dto.FieldUpdateRequest;
 public class FieldController {
 
     private final GetFieldsUseCase getUseCase;
-    private final ManageFieldsUseCase manageUseCase;
+    private final ManageFieldUseCase manageUseCase;
 
-    public FieldController(GetFieldsUseCase fieldsUseCase, ManageFieldsUseCase manageUseCase) {
+    public FieldController(GetFieldsUseCase fieldsUseCase, ManageFieldUseCase manageUseCase) {
         this.getUseCase = fieldsUseCase;
         this.manageUseCase = manageUseCase;
     }
 
     @GetMapping()
-    public List<FieldResponse> getFields(@RequestParam String databaseId) {
-        List<FieldResponse> response = this.getUseCase.getFieldsByDatabaseId(databaseId);
+    public List<FieldResponse> getFields(@RequestParam String baseId) {
+        List<FieldResponse> response = this.getUseCase.getFieldsByBaseId(baseId);
         return response;
     }
 

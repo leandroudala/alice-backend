@@ -6,7 +6,7 @@ import java.util.Optional;
 import app.udala.alice.domain.entity.Field;
 
 public interface FieldRepository {
-    List<Field> getFieldsByDataBaseId(String databaseId);
+    List<Field> getFieldsByBaseId(String baseId);
 
     Field insert(Field field);
 

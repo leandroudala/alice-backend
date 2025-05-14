@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import app.udala.alice.infrastructure.persistence.entity.FieldDocument;
 
 public interface FieldMongoRepository extends MongoRepository<FieldDocument, String> {
-    List<FieldDocument> findByDatabaseId(String databaseId);
+    List<FieldDocument> findByBaseId(String baseId);
 
     Optional<FieldDocument> findByTagAndDeletedAtIsNull(String tag);
 }

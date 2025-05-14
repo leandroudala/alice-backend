@@ -3,42 +3,42 @@ package app.udala.alice.application.usecase;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import app.udala.alice.application.port.DataBaseRepository;
+import app.udala.alice.application.port.BaseRepository;
 import app.udala.alice.application.port.FieldRepository;
-import app.udala.alice.application.port.ManageFieldsUseCase;
+import app.udala.alice.application.port.ManageFieldUseCase;
 import app.udala.alice.domain.entity.Field;
 import app.udala.alice.infrastructure.delivery.dto.FieldCreateRequest;
 import app.udala.alice.infrastructure.delivery.dto.FieldUpdateRequest;
 import app.udala.alice.infrastructure.delivery.mapper.FieldDeliveryMapper;
-import app.udala.alice.shared.exception.DataBaseNotFoundException;
+import app.udala.alice.shared.exception.BaseNotFoundException;
 import app.udala.alice.shared.exception.FieldDuplicatedTagException;
 import app.udala.alice.shared.exception.FieldNotFoundException;
 
-public class ManageFieldMongoUseCase implements ManageFieldsUseCase {
+public class ManageFieldMongoUseCase implements ManageFieldUseCase {
 
     private final FieldRepository repository;
-    private final DataBaseRepository databaseRepository;
+    private final BaseRepository baseRepository;
 
-    public ManageFieldMongoUseCase(FieldRepository repository, DataBaseRepository databaseRepository) {
+    public ManageFieldMongoUseCase(FieldRepository repository, BaseRepository baseRepository) {
         this.repository = repository;
-        this.databaseRepository = databaseRepository;
+        this.baseRepository = baseRepository;
     }
 
     @Override
     public Field create(FieldCreateRequest request) {
         Field field = FieldDeliveryMapper.toModel(request);
-        this.checkIfDatabaseExists(field.getDatabaseId());
+        this.checkIfBaseExists(field.getBaseId());
         field.setCreatedAt(LocalDateTime.now());
         return this.repository.insert(field);
     }
 
-    private void checkIfDatabaseExists(String databaseId) {
-        if (databaseId == null || databaseId.length() == 0) {
-            throw new DataBaseNotFoundException("null");
+    private void checkIfBaseExists(String baseId) {
+        if (baseId == null || baseId.length() == 0) {
+            throw new BaseNotFoundException("null");
         }
 
-        this.databaseRepository.findById(databaseId)
-                .orElseThrow(() -> new DataBaseNotFoundException(databaseId));
+        this.baseRepository.findById(baseId)
+                .orElseThrow(() -> new BaseNotFoundException(baseId));
     }
 
     @Override

@@ -1,10 +1,10 @@
 package app.udala.alice.infrastructure.delivery.dto;
 
-public class DataBaseResponse {
+public class BaseResponse {
     private final String id;
     private final String name;
 
-    public DataBaseResponse(String id, String name) {
+    public BaseResponse(String id, String name) {
         this.id = id;
         this.name = name;
     }

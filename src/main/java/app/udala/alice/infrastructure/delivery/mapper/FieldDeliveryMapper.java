@@ -23,14 +23,14 @@ public class FieldDeliveryMapper {
         model.setTag(request.getTag());
         model.setDescription(request.getDescription());
         model.setDataType(request.getDataType());
-        model.setDatabaseId(request.getDatabaseId());
+        model.setBaseId(request.getBaseId());
         return model;
     }
 
     public static FieldDetailsResponse toDetailedResponse(Field model) {
         FieldDetailsResponse response = new FieldDetailsResponse();
         response.setId(model.getId());
-        response.setDatabaseId(model.getDatabaseId());
+        response.setBaseId(model.getBaseId());
         response.setDataType(model.getDataType());
         response.setDescription(model.getDescription());
         response.setName(model.getName());

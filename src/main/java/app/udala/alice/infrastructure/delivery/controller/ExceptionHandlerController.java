@@ -20,7 +20,7 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(EntityDuplicatedException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponseDto handleDataBaseNotFoundException(EntityDuplicatedException ex) {
+    public ErrorResponseDto handleBaseNotFoundException(EntityDuplicatedException ex) {
         return new ErrorResponseDto(ex.getCategory(), ex.getTitle(), ex.getMessage());
     }
 

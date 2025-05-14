@@ -6,7 +6,7 @@ public class FieldResponse {
     private String name;
     private String dataType;
     private String description;
-    private String databaseId;
+    private String baseId;
 
     public String getId() {
         return this.id;
@@ -48,12 +48,12 @@ public class FieldResponse {
         this.description = description;
     }
 
-    public String getDatabaseId() {
-        return this.databaseId;
+    public String getBaseId() {
+        return this.baseId;
     }
 
-    public void setDatabaseId(String databaseId) {
-        this.databaseId = databaseId;
+    public void setBaseId(String baseId) {
+        this.baseId = baseId;
     }
 
 }

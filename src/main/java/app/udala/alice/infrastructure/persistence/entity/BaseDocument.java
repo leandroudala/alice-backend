@@ -1,14 +1,31 @@
-package app.udala.alice.infrastructure.delivery.dto;
+package app.udala.alice.infrastructure.persistence.entity;
 
-public class DataBaseDetailsResponse {
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document("Base")
+public class BaseDocument {
+
+    @Id
     private String id;
+
     private String name;
     private String description;
     private String createdAt;
     private String updatedAt;
     private String deletedAt;
 
-    public DataBaseDetailsResponse(String id, String name, String description, String createdAt, String updatedAt,
+    public BaseDocument() {
+        // empty constructor for ORM
+    }
+
+    public BaseDocument(String name, String description, String createdAt) {
+        this.name = name;
+        this.description = description;
+        this.createdAt = createdAt;
+    }
+
+    public BaseDocument(String id, String name, String description, String createdAt, String updatedAt,
             String deletedAt) {
         this.id = id;
         this.name = name;
@@ -16,10 +33,6 @@ public class DataBaseDetailsResponse {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-    }
-
-    public DataBaseDetailsResponse(String id, String name, String description, String createdAt, String updatedAt) {
-        this(id, name, description, createdAt, updatedAt, null);
     }
 
     public String getId() {

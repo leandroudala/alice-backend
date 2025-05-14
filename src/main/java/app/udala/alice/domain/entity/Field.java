@@ -12,7 +12,7 @@ public class Field {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
-    private String databaseId;
+    private String baseId;
 
     public String getId() {
         return this.id;
@@ -90,12 +90,12 @@ public class Field {
         this.dataType = dataType;
     }
 
-    public String getDatabaseId() {
-        return this.databaseId;
+    public String getBaseId() {
+        return this.baseId;
     }
 
-    public void setDatabaseId(String databaseId) {
-        this.databaseId = databaseId;
+    public void setBaseId(String baseId) {
+        this.baseId = baseId;
     }
 
 }
