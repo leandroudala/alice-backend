@@ -10,6 +10,8 @@ import app.udala.alice.infrastructure.delivery.dto.EntityDetailedResponse;
 import app.udala.alice.infrastructure.delivery.dto.EntityResponse;
 import app.udala.alice.infrastructure.delivery.dto.EntityUpdateRequest;
 import app.udala.alice.infrastructure.delivery.mapper.EntityDeliveryMapper;
+import app.udala.alice.shared.exception.EntityDuplicatedException;
+import app.udala.alice.shared.exception.EntityNotFoundException;
 
 public class EntityManagementMongoUseCase implements EntityManagementUseCase {
 
@@ -30,25 +32,33 @@ public class EntityManagementMongoUseCase implements EntityManagementUseCase {
     private void checkForDuplicatedEntity(String baseId, String name) {
         long total = this.repository.countByNameAndBaseIdAndDeletedAtIsNull(name, baseId);
         if (total > 0) {
-            throw new IllegalArgumentException("Entity already exists");
+            throw new EntityDuplicatedException("Entity already exists");
         }
     }
 
     @Override
     public void update(EntityUpdateRequest request) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        Entity entity = this.repository.findByById(request.getId())
+                .orElseThrow(() -> new EntityNotFoundException(request.getId()));
+        
+        if (!entity.getName().equalsIgnoreCase(request.getName())) {
+            this.checkForDuplicatedEntity(entity.getBaseId(), request.getName());
+        }
+        entity.setName(request.getName());
+        entity.setDescription(request.getDescription());
+        this.repository.save(entity);
     }
 
     @Override
     public void delete(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        Entity entity = this.repository.findByById(id)
+                .orElseThrow(() -> new EntityNotFoundException(id));
+        this.repository.delete(entity);
     }
 
     @Override
     public EntityDetailedResponse getById(String id) {
-        Entity entity = this.repository.findByBaseId(id)
+        Entity entity = this.repository.findByById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Entity not found"));
         
         return EntityDeliveryMapper.toDetailedResponse(entity);

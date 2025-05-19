@@ -52,4 +52,17 @@ public class PersistenceEntityRepository implements EntityRepository {
                 .toList();
     }
 
+    @Override
+    public Optional<Entity> findByById(String id) {
+        return this.repository.findById(id)
+                .map(EntityPersistenceMapper::toDomain);
+    }
+
+    @Override
+    public void delete(Entity entity) {
+        EntityDocument document = EntityPersistenceMapper.toDocument(entity);
+        document.preRemove();
+        this.repository.save(document);
+    }
+
 }

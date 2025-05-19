@@ -6,8 +6,8 @@ public class EntityDuplicatedException extends RuntimeException {
     private final String title;
     private final String category;
 
-    public EntityDuplicatedException(String message) {
-        this(message, DEFAULT_TITLE);
+    public EntityDuplicatedException(String entityName) {
+        this(String.format("Entity %s already exists.", entityName), DEFAULT_TITLE);
     }
 
     public EntityDuplicatedException(String message, String title) {

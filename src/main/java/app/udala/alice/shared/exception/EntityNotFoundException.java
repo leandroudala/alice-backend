@@ -6,8 +6,8 @@ public class EntityNotFoundException extends RuntimeException {
     private final String title;
     private final String category;
 
-    public EntityNotFoundException(String message) {
-        this(message, DEFAULT_TITLE);
+    public EntityNotFoundException(String id) {
+        this(String.format("Entity not found. Id: %s", id), DEFAULT_TITLE);
     }
 
     public EntityNotFoundException(String message, String title) {

@@ -10,7 +10,7 @@ public class EntityDeliveryMapper {
 
     public static EntityDetailedResponse toDetailedResponse(Entity entity) {
         EntityDetailedResponse response = new EntityDetailedResponse();
-        response.setId(entity.getBaseId());
+        response.setId(entity.getId());
         response.setName(entity.getName());
         response.setDescription(entity.getDescription());
         response.setCreatedAt(LocalDateTimeConverter.convertToString(entity.getCreatedAt()));
@@ -22,7 +22,7 @@ public class EntityDeliveryMapper {
 
     public static EntityResponse toResponse(Entity entity) {
         EntityResponse response = new EntityResponse();
-        response.setId(entity.getBaseId());
+        response.setId(entity.getId());
         response.setName(entity.getName());
         response.setDescription(entity.getDescription());
         return response;
