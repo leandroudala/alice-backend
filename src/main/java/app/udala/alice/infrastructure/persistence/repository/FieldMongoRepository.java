@@ -11,4 +11,6 @@ public interface FieldMongoRepository extends MongoRepository<FieldDocument, Str
     List<FieldDocument> findByEntityIdAndDeletedAtIsNull(String entityId);
 
     Optional<FieldDocument> findByTagAndDeletedAtIsNull(String tag);
+
+    List<FieldDocument> findAllByEntityIdAndDeletedAtIsNull(String entityId);
 }

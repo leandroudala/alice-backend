@@ -17,4 +17,6 @@ public interface FieldRepository {
     Field save(Field document);
 
     void delete(Field model);
+
+    List<Field> findAllByEntityIdAndDeletedAtIsNull(String entityId);
 }

@@ -66,4 +66,12 @@ public class PersistenceFieldRepository implements FieldRepository {
         this.repository.save(document);
     }
 
+    @Override
+    public List<Field> findAllByEntityIdAndDeletedAtIsNull(String entityId) {
+        return this.repository.findAllByEntityIdAndDeletedAtIsNull(entityId)
+                .stream()
+                .map(FieldPersistenceMapper::toDomain)
+                .collect(Collectors.toList());
+    }
+
 }
