@@ -6,7 +6,8 @@ public class FieldResponse {
     private String name;
     private String dataType;
     private String description;
-    private String baseId;
+    private String entityId;
+    private boolean required;
 
     public String getId() {
         return this.id;
@@ -48,12 +49,24 @@ public class FieldResponse {
         this.description = description;
     }
 
-    public String getBaseId() {
-        return this.baseId;
+    public String getEntityId() {
+        return this.entityId;
     }
 
-    public void setBaseId(String baseId) {
-        this.baseId = baseId;
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
+
+    public boolean isRequired() {
+        return this.required;
+    }
+
+    public boolean getRequired() {
+        return this.required;
+    }
+
+    public void setRequired(boolean required) {
+        this.required = required;
     }
 
 }

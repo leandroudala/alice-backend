@@ -18,8 +18,8 @@ public class PersistenceFieldRepository implements FieldRepository {
     }
 
     @Override
-    public List<Field> getFieldsByBaseId(String baseId) {
-        return this.repository.findByBaseId(baseId).stream()
+    public List<Field> getFieldsByEntityId(String baseId) {
+        return this.repository.findByEntityIdAndDeletedAtIsNull(baseId).stream()
                 .map(FieldPersistenceMapper::toDomain)
                 .collect(Collectors.toList());
     }

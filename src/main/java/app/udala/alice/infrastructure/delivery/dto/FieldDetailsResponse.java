@@ -2,7 +2,7 @@ package app.udala.alice.infrastructure.delivery.dto;
 
 public class FieldDetailsResponse {
     private String id;
-    private String baseId;
+    private String entityId;
     private String tag;
     private String name;
     private String dataType;
@@ -20,12 +20,12 @@ public class FieldDetailsResponse {
         this.id = id;
     }
 
-    public String getBaseId() {
-        return this.baseId;
+    public String getEntityId() {
+        return this.entityId;
     }
 
-    public void setBaseId(String baseId) {
-        this.baseId = baseId;
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
     }
 
     public String getTag() {

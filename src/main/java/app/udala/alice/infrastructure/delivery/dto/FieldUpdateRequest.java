@@ -1,11 +1,20 @@
 package app.udala.alice.infrastructure.delivery.dto;
 
 public class FieldUpdateRequest {
+    private String id;
     private String tag;
     private String name;
     private String dataType;
     private String description;
     private Boolean required;
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getTag() {
         return this.tag;

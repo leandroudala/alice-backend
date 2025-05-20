@@ -38,7 +38,7 @@ public class EntityManagementMongoUseCase implements EntityManagementUseCase {
 
     @Override
     public void update(EntityUpdateRequest request) {
-        Entity entity = this.repository.findByById(request.getId())
+        Entity entity = this.repository.findById(request.getId())
                 .orElseThrow(() -> new EntityNotFoundException(request.getId()));
         
         if (!entity.getName().equalsIgnoreCase(request.getName())) {
@@ -51,14 +51,14 @@ public class EntityManagementMongoUseCase implements EntityManagementUseCase {
 
     @Override
     public void delete(String id) {
-        Entity entity = this.repository.findByById(id)
+        Entity entity = this.repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id));
         this.repository.delete(entity);
     }
 
     @Override
     public EntityDetailedResponse getById(String id) {
-        Entity entity = this.repository.findByById(id)
+        Entity entity = this.repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Entity not found"));
         
         return EntityDeliveryMapper.toDetailedResponse(entity);

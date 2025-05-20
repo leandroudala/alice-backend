@@ -36,8 +36,8 @@ public class FieldController {
     }
 
     @GetMapping()
-    public List<FieldResponse> getFields(@RequestParam String baseId) {
-        List<FieldResponse> response = this.getUseCase.getFieldsByBaseId(baseId);
+    public List<FieldResponse> getFields(@RequestParam String entityId) {
+        List<FieldResponse> response = this.getUseCase.getFieldsByEntityId(entityId);
         return response;
     }
 
@@ -54,9 +54,9 @@ public class FieldController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable String id, @RequestBody FieldUpdateRequest request) {
-        this.manageUseCase.update(id, request);
+    @PutMapping
+    public ResponseEntity<Void> update(@RequestBody FieldUpdateRequest request) {
+        this.manageUseCase.update(request);
         return ResponseEntity.noContent().build();
     }
 

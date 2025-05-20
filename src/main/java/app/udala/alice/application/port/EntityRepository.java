@@ -11,6 +11,6 @@ public interface EntityRepository {
     long countByNameAndBaseIdAndDeletedAtIsNull(String name, String baseId);
     Entity save(Entity entity);
     List<Entity> findAllByBaseIdAndDeletedAtIsNull(String baseId);
-    Optional<Entity> findByById(String id);
+    Optional<Entity> findById(String id);
     void delete(Entity entity);
 }

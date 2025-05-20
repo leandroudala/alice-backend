@@ -6,6 +6,6 @@ import app.udala.alice.infrastructure.delivery.dto.FieldUpdateRequest;
 
 public interface ManageFieldUseCase {
     public Field create(FieldCreateRequest request);
-    public void update(String id, FieldUpdateRequest request);
+    public void update(FieldUpdateRequest request);
     public void deleteById(String id);
 }

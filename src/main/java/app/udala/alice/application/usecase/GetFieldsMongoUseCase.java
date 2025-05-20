@@ -19,8 +19,8 @@ public class GetFieldsMongoUseCase implements GetFieldsUseCase {
     }
 
     @Override
-    public List<FieldResponse> getFieldsByBaseId(String baseId) {
-        return this.repository.getFieldsByBaseId(baseId).stream()
+    public List<FieldResponse> getFieldsByEntityId(String entityId) {
+        return this.repository.getFieldsByEntityId(entityId).stream()
                 .map(FieldDeliveryMapper::toResponse)
                 .collect(Collectors.toList());
     }

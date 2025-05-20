@@ -53,7 +53,7 @@ public class PersistenceEntityRepository implements EntityRepository {
     }
 
     @Override
-    public Optional<Entity> findByById(String id) {
+    public Optional<Entity> findById(String id) {
         return this.repository.findById(id)
                 .map(EntityPersistenceMapper::toDomain);
     }
