@@ -46,7 +46,7 @@ public class FormController {
         return ResponseEntity.created(uri).build();
     }
 
-    @GetMapping("/{entityId}/values")
+    @GetMapping("/{entityId}/answers")
     public List<DocumentResponse> getValues(@PathVariable String entityId) {
         return this.usecase.findAllDynamic(entityId);
     }
