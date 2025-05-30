@@ -50,8 +50,8 @@ public class MongoFormUseCase implements FormUseCase {
     }
 
     @Override
-    public String insert(String entityId, String payload) {
-        Document document = Document.parse(payload);
+    public String insertAnswer(String entityId, String answerPayload) {
+        Document document = Document.parse(answerPayload);
         document.put("createdAt", LocalDateTimeConverter.convertToString(LocalDateTime.now()));
         return this.saveDynamicDocument(entityId, document);
     }

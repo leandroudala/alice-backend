@@ -12,7 +12,7 @@ public interface FormUseCase {
 
     List<FormResponse> getForms();
 
-    String insert(String entityId, String payload);
+    String insertAnswer(String entityId, String answerPayload);
 
     List<DocumentResponse> findAllDynamic(String entityId);
 

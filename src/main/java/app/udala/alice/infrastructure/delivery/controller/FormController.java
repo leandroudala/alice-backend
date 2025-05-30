@@ -38,10 +38,10 @@ public class FormController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/{entityId}")
-    public ResponseEntity<Void> insertData(@PathVariable String entityId, @RequestBody String payload,
+    @PostMapping("/{entityId}/answers")
+    public ResponseEntity<Void> insertAnswer(@PathVariable String entityId, @RequestBody String answerPayload,
             UriComponentsBuilder uriBuilder) {
-        String uuid = this.usecase.insert(entityId, payload);
+        String uuid = this.usecase.insertAnswer(entityId, answerPayload);
         URI uri = uriBuilder.path("/api/v1/forms/{entityId}/{id}").buildAndExpand(entityId, uuid).toUri();
         return ResponseEntity.created(uri).build();
     }
