@@ -12,3 +12,21 @@ spring:
 springdoc:
   swagger-ui:
     path: /docs
+
+
+grpc:
+  client:
+    embeddingService:
+      address: static://localhost:6565 # Address of your gRPC server
+      negotiationType: PLAINTEXT # Use PLAINTEXT for local development without SSL. Use TLS in production!
+      # --- Connection Health and Reconnection ---
+      enableKeepAlive: true      # Enable HTTP/2 PING frames to detect dead connections
+      keepAliveTime: 60s         # Send a PING after 60 seconds of inactivity
+      keepAliveTimeout: 20s      # Wait 20 seconds for PING ACK before considering connection dead
+      keepAliveWithoutCalls: true # Send PINGs even if there are no active RPCs
+
+      # --- Retry and Service Config ---
+      retryEnabled: true         # Enable retry mechanism globally for this client
+      # Path to your gRPC service configuration JSON file (classpath resource)
+      service-config:
+        path: classpath:grpc-service-config.json

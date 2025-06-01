@@ -17,6 +17,7 @@ import app.udala.alice.infrastructure.delivery.dto.DetailedFormResponse;
 import app.udala.alice.infrastructure.delivery.dto.DocumentResponse;
 import app.udala.alice.infrastructure.delivery.dto.FormResponse;
 
+
 @RequestMapping("/api/v1/forms")
 @RestController
 public class FormController {
@@ -50,4 +51,11 @@ public class FormController {
     public List<DocumentResponse> getValues(@PathVariable String entityId) {
         return this.usecase.findAllDynamic(entityId);
     }
+
+    @PostMapping("/{entityId}/index-answers")
+    public ResponseEntity<Void> indexAnswers(@PathVariable String entityId) {
+        this.usecase.indexAnswers(entityId);
+        return ResponseEntity.noContent().build();
+    }
+    
 }

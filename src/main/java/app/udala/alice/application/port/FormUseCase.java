@@ -16,4 +16,6 @@ public interface FormUseCase {
 
     List<DocumentResponse> findAllDynamic(String entityId);
 
+    void indexAnswers(String entityId);
+
 }

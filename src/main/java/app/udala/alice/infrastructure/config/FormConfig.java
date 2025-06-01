@@ -15,6 +15,7 @@ import app.udala.alice.application.port.EntityRepository;
 import app.udala.alice.application.port.FieldRepository;
 import app.udala.alice.application.port.FormUseCase;
 import app.udala.alice.application.usecase.MongoFormUseCase;
+import io.qdrant.client.QdrantClient;
 
 @Configuration
 public class FormConfig {
@@ -46,7 +47,7 @@ public class FormConfig {
 
     @Bean
     FormUseCase createFormUseCase(EntityRepository entityRepository,
-            FieldRepository fieldRepository, @Qualifier("dynamicMongoTemplate") MongoTemplate dynamicMongoTemplate) {
-        return new MongoFormUseCase(entityRepository, fieldRepository, dynamicMongoTemplate);
+            FieldRepository fieldRepository, @Qualifier("dynamicMongoTemplate") MongoTemplate dynamicMongoTemplate, @Qualifier("qdrantClient") QdrantClient qdrantClient) {
+        return new MongoFormUseCase(entityRepository, fieldRepository, dynamicMongoTemplate, qdrantClient);
     }
 }
