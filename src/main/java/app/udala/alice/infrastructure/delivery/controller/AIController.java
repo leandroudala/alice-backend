@@ -2,6 +2,8 @@ package app.udala.alice.infrastructure.delivery.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +22,20 @@ public class AIController {
     }
 
     @PostMapping("/generate-embeddings")
-    public List<Float> generateEmbeddings(@RequestBody String entity) {
-        return this.vectorUseCase.textToEmbed(entity);
+    public List<Float> generateEmbeddings(@RequestBody String text) {
+        return this.vectorUseCase.textToEmbed(text);
+    }
+
+    @PostMapping("/generate-embeddings/{entityId}/{documentId}")
+    public ResponseEntity<Void> generateEmbeddingsByDocumentId(@PathVariable String entityId, @PathVariable String documentId) {
+        this.vectorUseCase.indexDocument(documentId, entityId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity<String> search(@RequestBody String prompt) {
+        String result = this.vectorUseCase.search(prompt);
+        return ResponseEntity.ok(result);
     }
 
 }
