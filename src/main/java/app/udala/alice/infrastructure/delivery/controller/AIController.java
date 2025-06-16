@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.udala.alice.application.port.VectorIndexerUseCase;
@@ -33,8 +34,8 @@ public class AIController {
     }
 
     @PostMapping("/search")
-    public ResponseEntity<String> search(@RequestBody String prompt) {
-        String result = this.vectorUseCase.search(prompt);
+    public ResponseEntity<String> search(@RequestBody String prompt, @RequestParam(required = false, defaultValue = "10") Integer limit) {
+        String result = this.vectorUseCase.search(prompt, limit);
         return ResponseEntity.ok(result);
     }
 

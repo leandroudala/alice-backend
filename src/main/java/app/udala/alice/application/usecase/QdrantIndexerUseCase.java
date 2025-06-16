@@ -17,6 +17,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import app.udala.alice.EmbedStringRequest;
 import app.udala.alice.EmbedVectorResponse;
 import app.udala.alice.EmbeddingServiceGrpc.EmbeddingServiceBlockingStub;
+import app.udala.alice.GenerativeRequest;
 import app.udala.alice.GenerativeServiceGrpc.GenerativeServiceBlockingStub;
 import app.udala.alice.application.port.VectorIndexerUseCase;
 import app.udala.alice.shared.exception.MongoDocumentNotFoundException;
@@ -169,13 +170,19 @@ public class QdrantIndexerUseCase implements VectorIndexerUseCase {
     }
 
     @Override
-    public String search(String prompt) {
-        LOG.info("user prompt: {}", prompt);
-        List<Float> embedPrompt = this.textToEmbed(prompt);
+    public String search(String question, Integer limit) {
+        if (question.isBlank()) {
+            return "Please provide a question.";
+        }
+
+        question = question.strip();
+        LOG.info("user question: {}", question);
+
+        List<Float> embedPrompt = this.textToEmbed(question);
         QueryPoints search = QueryPoints.newBuilder()
                 .setCollectionName("6828de5f431c60717509d88f")
                 .setWithPayload(WithPayloadSelector.newBuilder().setEnable(true).build())
-                .setLimit(1l)
+                .setLimit(Long.valueOf(limit))
                 .setQuery(QueryFactory.nearest(embedPrompt))
                 .build();
 
@@ -183,21 +190,15 @@ public class QdrantIndexerUseCase implements VectorIndexerUseCase {
             List<ScoredPoint> list = this.vectorRepository.queryAsync(search).get();
             StringBuilder context = new StringBuilder();
             for (ScoredPoint point : list) {
-                LOG.info("> {}: {}", point.getScore(), point.getPayloadCount());
-
                 if (point.getPayloadCount() > 0) {
                     for (String payloadKey : point.getPayloadMap().keySet()) {
                         String value = point.getPayloadOrDefault(payloadKey, null).getStringValue();
-                        LOG.info("  - {}: {}", payloadKey, value);
                         context.append(payloadKey).append(": ").append(value).append("\n");
                     }
                 }
             }
 
-            context.append("\nBaseado EXCLUSIVAMENTE NO CONTEXTO acima, responda: ")
-                    .append(prompt);
-
-            return this.generateTextWithContext(context.toString().stripTrailing());
+            return this.generateTextWithContext(question, context.toString().stripTrailing());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -206,19 +207,21 @@ public class QdrantIndexerUseCase implements VectorIndexerUseCase {
         return "Error";
     }
 
-    private String generateTextWithContext(String context) {
-        EmbedStringRequest request = EmbedStringRequest.newBuilder()
-                .setText(context)
+    private String generateTextWithContext(String question, String context) {
+        GenerativeRequest request = GenerativeRequest.newBuilder()
+                .setQuestion(question)
+                .setContext(context)
                 .build();
 
         StringBuilder sb = new StringBuilder();
         this.generativeService.generativeText(request).forEachRemaining(response -> {
-            String text = response.getText();
+            String text = response.getResponse();
             System.out.print(text);
             sb.append(text);
         });
+        System.out.println();
 
-        String response = sb.toString();
+        String response = sb.toString().strip();
         LOG.info("LLM Response: {}", response);
         return response;
     }
