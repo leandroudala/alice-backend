@@ -3,7 +3,7 @@ spring:
     name: Alice AI
   data:
     mongodb:
-      uri: mongodb://root:example@localhost:27017/admin
+      uri: mongodb://root:example@host.docker.internal:27017/admin
       database: alice
   jackson:
     date-format: yyyy-MM-dd'T'HH:mm:ss.SSSSSS
@@ -17,7 +17,7 @@ springdoc:
 grpc:
   client:
     embeddingService:
-      address: static://localhost:6565 # Address of your gRPC server
+      address: static://host.docker.internal:6565 # Address of your gRPC server
       negotiationType: PLAINTEXT # Use PLAINTEXT for local development without SSL. Use TLS in production!
       # --- Connection Health and Reconnection ---
       enableKeepAlive: true      # Enable HTTP/2 PING frames to detect dead connections
